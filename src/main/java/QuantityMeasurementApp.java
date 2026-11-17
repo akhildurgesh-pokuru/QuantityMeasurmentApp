@@ -99,26 +99,128 @@ public class QuantityMeasurementApp {
         return q1.equals(q2);
     }
 
+
+    public static void demonstrateLengthConversion(
+            double value,
+            LengthUnit sourceUnit,
+            LengthUnit targetUnit) {
+
+        double result = QuantityLength.convert(
+                value,
+                sourceUnit,
+                targetUnit
+        );
+
+        System.out.println(
+                value + " " + sourceUnit +
+                        " = " + result + " " + targetUnit
+        );
+    }
+
+    // Overloaded version
+    public static void demonstrateLengthConversion(
+            QuantityLength quantity,
+            LengthUnit targetUnit) {
+
+        QuantityLength result = quantity.convertTo(targetUnit);
+
+        System.out.println("Converted quantity: " + result);
+    }
+
+
+
+
     public static void main(String[] args) {
 
-        // UC1: Feet equality
+        // UC1: Feet to Feet
         System.out.println("Feet equality: "
                 + compareFeet(1.0, 1.0));
 
-        // UC2: Inches equality
+        // UC2: Inches to Inches
         System.out.println("Inches equality: "
                 + compareInches(1.0, 1.0));
 
-        // UC3: Feet to Inches equality
+        // UC3: Feet to Inches
         System.out.println("Feet to Inches: "
                 + compareLengths(
                 1.0, LengthUnit.FEET,
                 12.0, LengthUnit.INCHES));
 
-        // UC3: Different measurements
-        System.out.println("Different lengths: "
+        // UC4: Yard to Feet
+        System.out.println("Yard to Feet: "
                 + compareLengths(
-                1.0, LengthUnit.FEET,
-                6.0, LengthUnit.INCHES));
+                1.0, LengthUnit.YARDS,
+                3.0, LengthUnit.FEET));
+
+        // UC4: Yard to Inches
+        System.out.println("Yard to Inches: "
+                + compareLengths(
+                1.0, LengthUnit.YARDS,
+                36.0, LengthUnit.INCHES));
+
+        // UC4: Centimeters to Inches
+        System.out.println("CM to Inches: "
+                + compareLengths(
+                1.0, LengthUnit.CENTIMETERS,
+                0.393701, LengthUnit.INCHES));
+
+        // UC4: Centimeters to Centimeters
+        System.out.println("CM to CM: "
+                + compareLengths(
+                2.0, LengthUnit.CENTIMETERS,
+                2.0, LengthUnit.CENTIMETERS));
+
+        // UC4: Different measurements
+        System.out.println("Different measurements: "
+                + compareLengths(
+                1.0, LengthUnit.YARDS,
+                2.0, LengthUnit.FEET));
+
+
+        // UC5: Feet to Inches
+                demonstrateLengthConversion(
+                        1.0,
+                        LengthUnit.FEET,
+                        LengthUnit.INCHES
+                );
+
+        // UC5: Yards to Feet
+                demonstrateLengthConversion(
+                        3.0,
+                        LengthUnit.YARDS,
+                        LengthUnit.FEET
+                );
+
+        // UC5: Inches to Yards
+                demonstrateLengthConversion(
+                        36.0,
+                        LengthUnit.INCHES,
+                        LengthUnit.YARDS
+                );
+
+        // UC5: Centimeters to Inches
+                demonstrateLengthConversion(
+                        1.0,
+                        LengthUnit.CENTIMETERS,
+                        LengthUnit.INCHES
+                );
+
+        // UC5: Zero
+                demonstrateLengthConversion(
+                        0.0,
+                        LengthUnit.FEET,
+                        LengthUnit.INCHES
+                );
+
+        // UC5: Instance conversion
+                QuantityLength length =
+                        new QuantityLength(2.0, LengthUnit.YARDS);
+
+                demonstrateLengthConversion(
+                        length,
+                        LengthUnit.FEET
+                );
+
     }
+
 }
