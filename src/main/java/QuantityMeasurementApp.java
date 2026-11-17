@@ -357,5 +357,37 @@ public class QuantityMeasurementApp {
                 uc7Feet,
                 uc7Inches,
                 LengthUnit.YARDS));
+
+
+        // UC8: Standalone enum conversions
+
+        System.out.println("12 inches to feet: "
+                + LengthUnit.INCHES.convertToBaseUnit(12.0));
+
+        System.out.println("1 yard to feet: "
+                + LengthUnit.YARDS.convertToBaseUnit(1.0));
+
+        System.out.println("2 feet to inches: "
+                + LengthUnit.INCHES.convertFromBaseUnit(2.0));
+
+        System.out.println("1 foot to cm: "
+                + LengthUnit.CENTIMETERS.convertFromBaseUnit(1.0));
+
+        // Existing QuantityLength APIs still work
+        QuantityLength uc8Feet =
+                new QuantityLength(1.0, LengthUnit.FEET);
+
+        QuantityLength uc8Inches =
+                new QuantityLength(12.0, LengthUnit.INCHES);
+
+        System.out.println("Equality: "
+                + uc8Feet.equals(uc8Inches));
+
+        System.out.println("Conversion: "
+                + uc8Feet.convertTo(LengthUnit.INCHES));
+
+        System.out.println("Addition: "
+                + uc8Feet.add(uc8Inches, LengthUnit.FEET));
+
     }
 }
