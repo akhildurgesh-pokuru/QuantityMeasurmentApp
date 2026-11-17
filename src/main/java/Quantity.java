@@ -268,25 +268,38 @@ public final class Quantity<U extends IMeasurable> {
      * execute the selected arithmetic operation,
      * and return its base-unit result.
      */
+
     private double performBaseArithmetic(
             Quantity<U> other,
             ArithmeticOperation operation) {
 
-        // Reuse centralized validation.
-        // No target unit is needed at this stage.
+        // Step 1: Check whether the second operand exists
+        // and whether both units belong to the same category.
+        //
+        // This is the UC13 centralized validation helper.
         validateArithmeticOperands(other, null, false);
 
-        // Convert the calling object's measurement
-        // into the common base unit.
+        // Step 2: NEW UC14 CHECK.
+        //
+        // Before calculating anything, ask the unit
+        // whether this arithmetic operation is supported.
+        //
+        // For LengthUnit, WeightUnit and VolumeUnit:
+        // the default implementation allows the operation.
+        //
+        // For TemperatureUnit:
+        // UnsupportedOperationException is thrown.
+        this.unit.validateOperationSupport(operation.name());
+
+        // Step 3: Convert both measurements
+        // into their common base unit.
         double firstBase =
                 this.unit.convertToBaseUnit(this.value);
 
-        // Convert the second measurement
-        // into the same base unit.
         double secondBase =
                 other.unit.convertToBaseUnit(other.value);
 
-        // Reject invalid converted values.
+        // Step 4: Validate converted measurements.
         if (!Double.isFinite(firstBase)
                 || !Double.isFinite(secondBase)) {
 
@@ -294,22 +307,20 @@ public final class Quantity<U extends IMeasurable> {
                     "Base-unit conversion result is not finite");
         }
 
-        // Execute ADD, SUBTRACT, or DIVIDE.
-        //
-        // The operation enum decides the formula.
+        // Step 5: Execute ADD, SUBTRACT, or DIVIDE
+        // using the existing UC13 ArithmeticOperation enum.
         double result =
                 operation.compute(firstBase, secondBase);
 
-        // Check whether arithmetic overflow occurred.
+        // Step 6: Reject invalid arithmetic results.
         if (!Double.isFinite(result)) {
             throw new ArithmeticException(
                     "Arithmetic result is not finite");
         }
 
-        // For ADD/SUBTRACT result has base-unit meaning.
-        // For DIVIDE result is already a ratio.
         return result;
     }
+
 
 
     // ==========================================
