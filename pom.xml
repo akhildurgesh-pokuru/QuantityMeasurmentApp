@@ -83,15 +83,20 @@
         <plugins>
 
             <!-- Starts Spring Boot and builds an executable JAR. -->
+
+            <!-- UC17: Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
                 <configuration>
+                    <!-- Use the complete package + class name once -->
                     <mainClass>
                         com.app.quantitymeasurement.QuantityMeasurementApplication
                     </mainClass>
                 </configuration>
             </plugin>
+
 
             <!-- One Surefire declaration only. -->
             <plugin>
