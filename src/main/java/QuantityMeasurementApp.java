@@ -483,7 +483,6 @@ public class QuantityMeasurementApp {
                 + uc9Kg.equals(uc9Length));
 
 
-<<<<<<< HEAD
         // ==========================================
         // UC10: Generic Quantity with Interface
         // ==========================================
@@ -543,7 +542,7 @@ public class QuantityMeasurementApp {
 
         System.out.println(
                 "\n===== ALL USE CASES COMPLETED =====");
-=======
+
         // UC9: Weight Measurement
 
         // Equality
@@ -557,7 +556,7 @@ public class QuantityMeasurementApp {
                 + uc9DemoKg.equals(uc9DemoGrams));
 
         // Pounds equality
-                QuantityWeight uc9Pounds =
+                QuantityWeight uc9Pounds1 =
                         new QuantityWeight(2.20462, WeightUnit.POUND);
 
                 System.out.println("KG vs Pounds: "
@@ -580,13 +579,134 @@ public class QuantityMeasurementApp {
                         + uc9Kg.add(uc9Grams, WeightUnit.GRAM));
 
         // Check category incompatibility
-                QuantityLength uc9Length =
+                QuantityLength uc9Length1 =
                         new QuantityLength(1.0, LengthUnit.FEET);
 
                 System.out.println("Weight vs Length: "
                         + uc9Kg.equals(uc9Length));
 
->>>>>>> 289727af6fa76c2289f449068d207e656fc261ee
+
+        // ================================================
+        // UC11: Volume Equality, Conversion and Addition
+        // ================================================
+
+                System.out.println("\n===== UC11: VOLUME MEASUREMENT =====");
+
+        // Create a quantity representing 1 litre.
+                Quantity<VolumeUnit> uc11Litre =
+                        new Quantity<>(1.0, VolumeUnit.LITRE);
+
+        // Create a quantity representing 1000 millilitres.
+                Quantity<VolumeUnit> uc11Millilitres =
+                        new Quantity<>(1000.0, VolumeUnit.MILLILITRE);
+
+        // Create a quantity representing 1 US gallon.
+                Quantity<VolumeUnit> uc11Gallon =
+                        new Quantity<>(1.0, VolumeUnit.GALLON);
+
+
+        // --------------------------------
+        // 1. Equality Comparison
+        // --------------------------------
+
+        // Compare 1 litre with 1000 millilitres.
+        // Expected: true
+                System.out.println("Litre vs Millilitre: "
+                        + uc11Litre.equals(uc11Millilitres));
+
+        // Compare 1 gallon with 3.78541 litres.
+        // Expected: true
+                Quantity<VolumeUnit> uc11EquivalentLitres =
+                        new Quantity<>(3.78541, VolumeUnit.LITRE);
+
+                System.out.println("Gallon vs Litres: "
+                        + uc11Gallon.equals(uc11EquivalentLitres));
+
+        // Reuse generic demonstration method from UC10.
+                demonstrateEquality(
+                        uc11Litre,
+                        uc11Millilitres
+                );
+
+
+        // --------------------------------
+        // 2. Volume Conversion
+        // --------------------------------
+
+        // Convert 1 litre into millilitres.
+        // Expected: 1000.0 MILLILITRE
+                System.out.println("Litre to Millilitre: "
+                        + uc11Litre.convertTo(VolumeUnit.MILLILITRE));
+
+        // Convert 1 gallon into litres.
+        // Expected: 3.78541 LITRE
+                System.out.println("Gallon to Litre: "
+                        + uc11Gallon.convertTo(VolumeUnit.LITRE));
+
+        // Convert 1000 millilitres into gallons.
+        // Expected: approximately 0.264172 GALLON
+                System.out.println("Millilitre to Gallon: "
+                        + uc11Millilitres.convertTo(VolumeUnit.GALLON));
+
+        // Reuse UC10 generic conversion method.
+                demonstrateConversion(
+                        uc11Litre,
+                        VolumeUnit.MILLILITRE
+                );
+
+
+        // --------------------------------
+        // 3. Volume Addition
+        // --------------------------------
+
+        // Add 1 litre and 1000 millilitres.
+        // Result is in the first operand's unit: LITRE.
+        // Expected: 2.0 LITRE
+                System.out.println("Litre + Millilitre: "
+                        + uc11Litre.add(uc11Millilitres));
+
+        // Add the same values but request MILLILITRE.
+        // Expected: 2000.0 MILLILITRE
+                System.out.println("Addition in Millilitres: "
+                        + uc11Litre.add(
+                        uc11Millilitres,
+                        VolumeUnit.MILLILITRE
+                ));
+
+        // Add 1 gallon and 1 litre.
+        // Result is expressed in GALLON.
+                System.out.println("Gallon + Litre: "
+                        + uc11Gallon.add(uc11Litre));
+
+        // Reuse UC10 generic addition method.
+                demonstrateAddition(
+                        uc11Litre,
+                        uc11Millilitres,
+                        VolumeUnit.LITRE
+                );
+
+
+        // --------------------------------
+        // 4. Cross-category Comparison
+        // --------------------------------
+
+        // A length cannot equal a volume.
+                Quantity<LengthUnit> uc11Length =
+                        new Quantity<>(1.0, LengthUnit.FEET);
+
+        // A weight cannot equal a volume.
+                Quantity<WeightUnit> uc11Weight =
+                        new Quantity<>(1.0, WeightUnit.KILOGRAM);
+
+        // Both comparisons should return false.
+                System.out.println("Volume vs Length: "
+                        + uc11Litre.equals(uc11Length));
+
+                System.out.println("Volume vs Weight: "
+                        + uc11Litre.equals(uc11Weight));
+
+
+
     }
 
 }
