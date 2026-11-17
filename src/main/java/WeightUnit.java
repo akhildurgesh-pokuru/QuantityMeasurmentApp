@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-public enum WeightUnit {
+public enum WeightUnit implements IMeasurable{
 
     KILOGRAM("1"),
     GRAM("0.001"),
@@ -74,4 +74,16 @@ public enum WeightUnit {
                     "Weight must be a finite number");
         }
     }
+
+
+    @Override
+    public String getUnitName() {
+        return name();
+    }
+
+    @Override
+    public BigDecimal normalizedBaseValue(double value) {
+        return normalizedKilograms(value);
+    }
+
 }
