@@ -144,6 +144,42 @@ public class QuantityMeasurementApp {
     }
 
 
+    // One equality method for all measurement categories
+    public static <U extends IMeasurable> void demonstrateEquality(
+            Quantity<U> first,
+            Quantity<U> second) {
+
+        System.out.println(
+                first + " equals " + second
+                        + " = " + first.equals(second)
+        );
+    }
+
+    // One conversion method for all categories
+    public static <U extends IMeasurable> void demonstrateConversion(
+            Quantity<U> quantity,
+            U targetUnit) {
+
+        System.out.println(
+                quantity + " converted to " + targetUnit
+                        + " = " + quantity.convertTo(targetUnit)
+        );
+    }
+
+    // One addition method for all categories
+    public static <U extends IMeasurable> void demonstrateAddition(
+            Quantity<U> first,
+            Quantity<U> second,
+            U targetUnit) {
+
+        System.out.println(
+                first + " + " + second
+                        + " = " + first.add(second, targetUnit)
+        );
+    }
+
+
+
     public static void main(String[] args) {
 
         // UC1: Feet to Feet
@@ -318,7 +354,7 @@ public class QuantityMeasurementApp {
                 -2.0, LengthUnit.FEET);
 
 
-// UC7: Addition with explicit target unit
+        // UC7: Addition with explicit target unit
 
         QuantityLength UC7feet =
                 new QuantityLength(1.0, LengthUnit.FEET);
@@ -388,6 +424,55 @@ public class QuantityMeasurementApp {
 
         System.out.println("Addition: "
                 + uc8Feet.add(uc8Inches, LengthUnit.FEET));
+
+
+
+        // UC10: Generic Quantity demonstration
+
+                Quantity<LengthUnit> uc10Feet =
+                        new Quantity<>(1.0, LengthUnit.FEET);
+
+                Quantity<LengthUnit> uc10Inches =
+                        new Quantity<>(12.0, LengthUnit.INCHES);
+
+        // Length equality
+                demonstrateEquality(uc10Feet, uc10Inches);
+
+        // Length conversion
+                demonstrateConversion(uc10Feet, LengthUnit.INCHES);
+
+        // Length addition
+                demonstrateAddition(
+                        uc10Feet,
+                        uc10Inches,
+                        LengthUnit.FEET
+                );
+
+        // Weight objects
+                Quantity<WeightUnit> uc10Kg =
+                        new Quantity<>(1.0, WeightUnit.KILOGRAM);
+
+                Quantity<WeightUnit> uc10Grams =
+                        new Quantity<>(1000.0, WeightUnit.GRAM);
+
+        // Weight equality
+                demonstrateEquality(uc10Kg, uc10Grams);
+
+        // Weight conversion
+                demonstrateConversion(uc10Kg, WeightUnit.GRAM);
+
+        // Weight addition
+                demonstrateAddition(
+                        uc10Kg,
+                        uc10Grams,
+                        WeightUnit.KILOGRAM
+                );
+
+        // Runtime category check
+                System.out.println(
+                        "Length vs Weight: " + uc10Feet.equals(uc10Kg)
+                );
+
 
     }
 }
