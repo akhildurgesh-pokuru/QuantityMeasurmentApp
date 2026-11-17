@@ -144,9 +144,6 @@ public class QuantityMeasurementApp {
     }
 
 
-
-
-
     public static void main(String[] args) {
 
         // UC1: Feet to Feet
@@ -195,132 +192,170 @@ public class QuantityMeasurementApp {
 
 
         // UC5: Feet to Inches
-                demonstrateLengthConversion(
-                        1.0,
-                        LengthUnit.FEET,
-                        LengthUnit.INCHES
-                );
+        demonstrateLengthConversion(
+                1.0,
+                LengthUnit.FEET,
+                LengthUnit.INCHES
+        );
 
         // UC5: Yards to Feet
-                demonstrateLengthConversion(
-                        3.0,
-                        LengthUnit.YARDS,
-                        LengthUnit.FEET
-                );
+        demonstrateLengthConversion(
+                3.0,
+                LengthUnit.YARDS,
+                LengthUnit.FEET
+        );
 
         // UC5: Inches to Yards
-                demonstrateLengthConversion(
-                        36.0,
-                        LengthUnit.INCHES,
-                        LengthUnit.YARDS
-                );
+        demonstrateLengthConversion(
+                36.0,
+                LengthUnit.INCHES,
+                LengthUnit.YARDS
+        );
 
         // UC5: Centimeters to Inches
-                demonstrateLengthConversion(
-                        1.0,
-                        LengthUnit.CENTIMETERS,
-                        LengthUnit.INCHES
-                );
+        demonstrateLengthConversion(
+                1.0,
+                LengthUnit.CENTIMETERS,
+                LengthUnit.INCHES
+        );
 
         // UC5: Zero
-                demonstrateLengthConversion(
-                        0.0,
-                        LengthUnit.FEET,
-                        LengthUnit.INCHES
-                );
+        demonstrateLengthConversion(
+                0.0,
+                LengthUnit.FEET,
+                LengthUnit.INCHES
+        );
 
         // UC5: Instance conversion
-                QuantityLength length =
-                        new QuantityLength(2.0, LengthUnit.YARDS);
+        QuantityLength length =
+                new QuantityLength(2.0, LengthUnit.YARDS);
 
-                demonstrateLengthConversion(
-                        length,
-                        LengthUnit.FEET
-                );
+        demonstrateLengthConversion(
+                length,
+                LengthUnit.FEET
+        );
 
 
         // UC6: Same-unit addition
-                QuantityLength feet1 =
-                        new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength feet1 =
+                new QuantityLength(1.0, LengthUnit.FEET);
 
-                QuantityLength feet2 =
-                        new QuantityLength(2.0, LengthUnit.FEET);
+        QuantityLength feet2 =
+                new QuantityLength(2.0, LengthUnit.FEET);
 
-                System.out.println("Feet + Feet: " + feet1.add(feet2));
+        System.out.println("Feet + Feet: " + feet1.add(feet2));
 
 
         // UC6: Feet + Inches
-                QuantityLength feet =
-                        new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength feet =
+                new QuantityLength(1.0, LengthUnit.FEET);
 
-                QuantityLength inches =
-                        new QuantityLength(12.0, LengthUnit.INCHES);
+        QuantityLength inches =
+                new QuantityLength(12.0, LengthUnit.INCHES);
 
-                System.out.println("Feet + Inches: " + feet.add(inches));
+        System.out.println("Feet + Inches: " + feet.add(inches));
 
 
         // UC6: Inches + Feet
-                System.out.println("Inches + Feet: " + inches.add(feet));
+        System.out.println("Inches + Feet: " + inches.add(feet));
 
 
         // UC6: Yards + Feet
-                QuantityLength yards =
-                        new QuantityLength(1.0, LengthUnit.YARDS);
+        QuantityLength yards =
+                new QuantityLength(1.0, LengthUnit.YARDS);
 
-                QuantityLength threeFeet =
-                        new QuantityLength(3.0, LengthUnit.FEET);
+        QuantityLength threeFeet =
+                new QuantityLength(3.0, LengthUnit.FEET);
 
-                System.out.println("Yards + Feet: " + yards.add(threeFeet));
+        System.out.println("Yards + Feet: " + yards.add(threeFeet));
 
 
         // UC6: Centimeters + Inches
-                QuantityLength cm =
-                        new QuantityLength(2.54, LengthUnit.CENTIMETERS);
+        QuantityLength cm =
+                new QuantityLength(2.54, LengthUnit.CENTIMETERS);
 
-                QuantityLength oneInch =
-                        new QuantityLength(1.0, LengthUnit.INCHES);
+        QuantityLength oneInch =
+                new QuantityLength(1.0, LengthUnit.INCHES);
 
-                System.out.println("CM + Inches: " + cm.add(oneInch));
+        System.out.println("CM + Inches: " + cm.add(oneInch));
 
 
         // UC6: Negative values
-                QuantityLength fiveFeet =
-                        new QuantityLength(5.0, LengthUnit.FEET);
+        QuantityLength fiveFeet =
+                new QuantityLength(5.0, LengthUnit.FEET);
 
-                QuantityLength negativeFeet =
-                        new QuantityLength(-2.0, LengthUnit.FEET);
+        QuantityLength negativeFeet =
+                new QuantityLength(-2.0, LengthUnit.FEET);
 
-                System.out.println("Negative addition: "
-                        + fiveFeet.add(negativeFeet));
+        System.out.println("Negative addition: "
+                + fiveFeet.add(negativeFeet));
 
 
         // UC6 examples
 
-                demonstrateAddition(
-                        1.0, LengthUnit.FEET,
-                        2.0, LengthUnit.FEET);
+        demonstrateAddition(
+                1.0, LengthUnit.FEET,
+                2.0, LengthUnit.FEET);
 
-                demonstrateAddition(
-                        1.0, LengthUnit.FEET,
-                        12.0, LengthUnit.INCHES);
+        demonstrateAddition(
+                1.0, LengthUnit.FEET,
+                12.0, LengthUnit.INCHES);
 
-                demonstrateAddition(
-                        12.0, LengthUnit.INCHES,
-                        1.0, LengthUnit.FEET);
+        demonstrateAddition(
+                12.0, LengthUnit.INCHES,
+                1.0, LengthUnit.FEET);
 
-                demonstrateAddition(
-                        1.0, LengthUnit.YARDS,
-                        3.0, LengthUnit.FEET);
+        demonstrateAddition(
+                1.0, LengthUnit.YARDS,
+                3.0, LengthUnit.FEET);
 
-                demonstrateAddition(
-                        2.54, LengthUnit.CENTIMETERS,
-                        1.0, LengthUnit.INCHES);
+        demonstrateAddition(
+                2.54, LengthUnit.CENTIMETERS,
+                1.0, LengthUnit.INCHES);
 
-                demonstrateAddition(
-                        5.0, LengthUnit.FEET,
-                        -2.0, LengthUnit.FEET);
+        demonstrateAddition(
+                5.0, LengthUnit.FEET,
+                -2.0, LengthUnit.FEET);
 
 
+// UC7: Addition with explicit target unit
+
+        QuantityLength UC7feet =
+                new QuantityLength(1.0, LengthUnit.FEET);
+
+        QuantityLength UC7inches =
+                new QuantityLength(12.0, LengthUnit.INCHES);
+
+
+        // UC7: Addition with explicit target unit
+
+        QuantityLength uc7Feet =
+                new QuantityLength(1.0, LengthUnit.FEET);
+
+        QuantityLength uc7Inches =
+                new QuantityLength(12.0, LengthUnit.INCHES);
+
+        // Result in feet
+        System.out.println("Target FEET: "
+                + uc7Feet.add(uc7Inches, LengthUnit.FEET));
+
+        // Result in inches
+        System.out.println("Target INCHES: "
+                + uc7Feet.add(uc7Inches, LengthUnit.INCHES));
+
+        // Result in yards
+        System.out.println("Target YARDS: "
+                + uc7Feet.add(uc7Inches, LengthUnit.YARDS));
+
+        // Result in centimeters
+        System.out.println("Target CENTIMETERS: "
+                + uc7Feet.add(uc7Inches, LengthUnit.CENTIMETERS));
+
+        // Using the static addition method
+        System.out.println("Static addition: "
+                + QuantityLength.add(
+                uc7Feet,
+                uc7Inches,
+                LengthUnit.YARDS));
     }
-
 }
