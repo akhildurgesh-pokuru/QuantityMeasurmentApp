@@ -483,6 +483,7 @@ public class QuantityMeasurementApp {
                 + uc9Kg.equals(uc9Length));
 
 
+<<<<<<< HEAD
         // ==========================================
         // UC10: Generic Quantity with Interface
         // ==========================================
@@ -542,6 +543,50 @@ public class QuantityMeasurementApp {
 
         System.out.println(
                 "\n===== ALL USE CASES COMPLETED =====");
+=======
+        // UC9: Weight Measurement
+
+        // Equality
+                QuantityWeight uc9Kg =
+                        new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+
+                QuantityWeight uc9Grams =
+                        new QuantityWeight(1000.0, WeightUnit.GRAM);
+
+                System.out.println("KG vs Grams: "
+                        + uc9Kg.equals(uc9Grams));
+
+        // Pounds equality
+                QuantityWeight uc9Pounds =
+                        new QuantityWeight(2.20462, WeightUnit.POUND);
+
+                System.out.println("KG vs Pounds: "
+                        + uc9Kg.equals(uc9Pounds));
+
+        // Conversion
+                System.out.println("KG to Grams: "
+                        + uc9Kg.convertTo(WeightUnit.GRAM));
+
+                System.out.println("Pounds to KG: "
+                        + new QuantityWeight(2.0, WeightUnit.POUND)
+                        .convertTo(WeightUnit.KILOGRAM));
+
+        // Addition - default target unit
+                System.out.println("KG + Grams: "
+                        + uc9Kg.add(uc9Grams));
+
+        // Addition - explicit target unit
+                System.out.println("KG + Grams in GRAM: "
+                        + uc9Kg.add(uc9Grams, WeightUnit.GRAM));
+
+        // Check category incompatibility
+                QuantityLength uc9Length =
+                        new QuantityLength(1.0, LengthUnit.FEET);
+
+                System.out.println("Weight vs Length: "
+                        + uc9Kg.equals(uc9Length));
+
+>>>>>>> 289727af6fa76c2289f449068d207e656fc261ee
     }
 
 }

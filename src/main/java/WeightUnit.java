@@ -3,7 +3,12 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+<<<<<<< HEAD
 public enum WeightUnit implements IMeasurable {
+=======
+public enum WeightUnit implements IMeasurable{
+public enum WeightUnit {
+>>>>>>> 289727af6fa76c2289f449068d207e656fc261ee
 
     KILOGRAM("1"),
     GRAM("0.001"),
