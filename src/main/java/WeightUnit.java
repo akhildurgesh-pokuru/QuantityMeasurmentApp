@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-public enum WeightUnit implements IMeasurable{
+public enum WeightUnit implements IMeasurable {
 
     KILOGRAM("1"),
     GRAM("0.001"),
@@ -16,12 +16,14 @@ public enum WeightUnit implements IMeasurable{
         this.conversionFactor = new BigDecimal(factor);
     }
 
-    // Returns factor relative to kilograms
+    // Return the conversion factor relative to kilograms
+    @Override
     public BigDecimal getConversionFactor() {
         return conversionFactor;
     }
 
-    // Convert this unit into kilograms
+    // Convert this weight unit into kilograms
+    @Override
     public double convertToBaseUnit(double value) {
 
         validate(value);
@@ -39,13 +41,17 @@ public enum WeightUnit implements IMeasurable{
         return converted;
     }
 
-    // Convert kilograms into this unit
+    // Convert kilograms into this weight unit
+    @Override
     public double convertFromBaseUnit(double baseValue) {
 
         validate(baseValue);
 
         BigDecimal result = BigDecimal.valueOf(baseValue)
-                .divide(conversionFactor, MathContext.DECIMAL64);
+                .divide(
+                        conversionFactor,
+                        MathContext.DECIMAL64
+                );
 
         double converted = result.doubleValue();
 
@@ -57,7 +63,7 @@ public enum WeightUnit implements IMeasurable{
         return converted;
     }
 
-    // Common representation for equals and hashCode
+    // Normalize weights for equals() and hashCode()
     public BigDecimal normalizedKilograms(double value) {
 
         validate(value);
@@ -67,6 +73,19 @@ public enum WeightUnit implements IMeasurable{
                 .setScale(5, RoundingMode.HALF_UP);
     }
 
+    // Return unit name
+    @Override
+    public String getUnitName() {
+        return name();
+    }
+
+    // Common method required by IMeasurable
+    @Override
+    public BigDecimal normalizedBaseValue(double value) {
+        return normalizedKilograms(value);
+    }
+
+    // Validate input
     private static void validate(double value) {
 
         if (!Double.isFinite(value)) {
@@ -74,16 +93,4 @@ public enum WeightUnit implements IMeasurable{
                     "Weight must be a finite number");
         }
     }
-
-
-    @Override
-    public String getUnitName() {
-        return name();
-    }
-
-    @Override
-    public BigDecimal normalizedBaseValue(double value) {
-        return normalizedKilograms(value);
-    }
-
 }

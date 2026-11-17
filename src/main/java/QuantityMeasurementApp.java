@@ -180,190 +180,189 @@ public class QuantityMeasurementApp {
 
 
 
+
     public static void main(String[] args) {
 
-        // UC1: Feet to Feet
-        System.out.println("Feet equality: "
+        // ==========================================
+        // UC1: Feet Measurement Equality
+        // ==========================================
+
+        System.out.println("\n===== UC1: FEET EQUALITY =====");
+
+        System.out.println("Same Feet: "
                 + compareFeet(1.0, 1.0));
 
-        // UC2: Inches to Inches
-        System.out.println("Inches equality: "
+        System.out.println("Different Feet: "
+                + compareFeet(1.0, 2.0));
+
+
+        // ==========================================
+        // UC2: Feet and Inches Equality
+        // ==========================================
+
+        System.out.println("\n===== UC2: INCHES EQUALITY =====");
+
+        System.out.println("Same Inches: "
                 + compareInches(1.0, 1.0));
 
-        // UC3: Feet to Inches
-        System.out.println("Feet to Inches: "
+        System.out.println("Different Inches: "
+                + compareInches(1.0, 2.0));
+
+
+        // ==========================================
+        // UC3: Generic Length Equality
+        // ==========================================
+
+        System.out.println("\n===== UC3: LENGTH EQUALITY =====");
+
+        System.out.println("1 Feet vs 12 Inches: "
                 + compareLengths(
                 1.0, LengthUnit.FEET,
                 12.0, LengthUnit.INCHES));
 
-        // UC4: Yard to Feet
-        System.out.println("Yard to Feet: "
+        System.out.println("2 Feet vs 12 Inches: "
+                + compareLengths(
+                2.0, LengthUnit.FEET,
+                12.0, LengthUnit.INCHES));
+
+
+        // ==========================================
+        // UC4: Extended Length Units
+        // ==========================================
+
+        System.out.println("\n===== UC4: EXTENDED LENGTH UNITS =====");
+
+        System.out.println("1 Yard vs 3 Feet: "
                 + compareLengths(
                 1.0, LengthUnit.YARDS,
                 3.0, LengthUnit.FEET));
 
-        // UC4: Yard to Inches
-        System.out.println("Yard to Inches: "
+        System.out.println("1 Yard vs 36 Inches: "
                 + compareLengths(
                 1.0, LengthUnit.YARDS,
                 36.0, LengthUnit.INCHES));
 
-        // UC4: Centimeters to Inches
-        System.out.println("CM to Inches: "
+        System.out.println("1 CM vs 0.393701 Inches: "
                 + compareLengths(
                 1.0, LengthUnit.CENTIMETERS,
                 0.393701, LengthUnit.INCHES));
 
-        // UC4: Centimeters to Centimeters
-        System.out.println("CM to CM: "
+        System.out.println("2 CM vs 2 CM: "
                 + compareLengths(
                 2.0, LengthUnit.CENTIMETERS,
                 2.0, LengthUnit.CENTIMETERS));
 
-        // UC4: Different measurements
-        System.out.println("Different measurements: "
+        System.out.println("1 Yard vs 2 Feet: "
                 + compareLengths(
                 1.0, LengthUnit.YARDS,
                 2.0, LengthUnit.FEET));
 
 
-        // UC5: Feet to Inches
+        // ==========================================
+        // UC5: Unit Conversion
+        // ==========================================
+
+        System.out.println("\n===== UC5: LENGTH CONVERSION =====");
+
         demonstrateLengthConversion(
                 1.0,
                 LengthUnit.FEET,
-                LengthUnit.INCHES
-        );
+                LengthUnit.INCHES);
 
-        // UC5: Yards to Feet
         demonstrateLengthConversion(
                 3.0,
                 LengthUnit.YARDS,
-                LengthUnit.FEET
-        );
+                LengthUnit.FEET);
 
-        // UC5: Inches to Yards
         demonstrateLengthConversion(
                 36.0,
                 LengthUnit.INCHES,
-                LengthUnit.YARDS
-        );
+                LengthUnit.YARDS);
 
-        // UC5: Centimeters to Inches
         demonstrateLengthConversion(
                 1.0,
                 LengthUnit.CENTIMETERS,
-                LengthUnit.INCHES
-        );
+                LengthUnit.INCHES);
 
-        // UC5: Zero
         demonstrateLengthConversion(
                 0.0,
                 LengthUnit.FEET,
-                LengthUnit.INCHES
-        );
+                LengthUnit.INCHES);
 
-        // UC5: Instance conversion
-        QuantityLength length =
+        QuantityLength uc5Length =
                 new QuantityLength(2.0, LengthUnit.YARDS);
 
         demonstrateLengthConversion(
-                length,
-                LengthUnit.FEET
-        );
+                uc5Length,
+                LengthUnit.FEET);
 
 
-        // UC6: Same-unit addition
-        QuantityLength feet1 =
+        // ==========================================
+        // UC6: Addition of Length Measurements
+        // Result uses first operand's unit
+        // ==========================================
+
+        System.out.println("\n===== UC6: LENGTH ADDITION =====");
+
+        QuantityLength uc6Feet1 =
                 new QuantityLength(1.0, LengthUnit.FEET);
 
-        QuantityLength feet2 =
+        QuantityLength uc6Feet2 =
                 new QuantityLength(2.0, LengthUnit.FEET);
 
-        System.out.println("Feet + Feet: " + feet1.add(feet2));
+        System.out.println("Feet + Feet: "
+                + uc6Feet1.add(uc6Feet2));
 
-
-        // UC6: Feet + Inches
-        QuantityLength feet =
+        QuantityLength uc6Feet =
                 new QuantityLength(1.0, LengthUnit.FEET);
 
-        QuantityLength inches =
+        QuantityLength uc6Inches =
                 new QuantityLength(12.0, LengthUnit.INCHES);
 
-        System.out.println("Feet + Inches: " + feet.add(inches));
+        System.out.println("Feet + Inches: "
+                + uc6Feet.add(uc6Inches));
 
+        System.out.println("Inches + Feet: "
+                + uc6Inches.add(uc6Feet));
 
-        // UC6: Inches + Feet
-        System.out.println("Inches + Feet: " + inches.add(feet));
-
-
-        // UC6: Yards + Feet
-        QuantityLength yards =
+        QuantityLength uc6Yards =
                 new QuantityLength(1.0, LengthUnit.YARDS);
 
-        QuantityLength threeFeet =
+        QuantityLength uc6ThreeFeet =
                 new QuantityLength(3.0, LengthUnit.FEET);
 
-        System.out.println("Yards + Feet: " + yards.add(threeFeet));
+        System.out.println("Yards + Feet: "
+                + uc6Yards.add(uc6ThreeFeet));
 
-
-        // UC6: Centimeters + Inches
-        QuantityLength cm =
+        QuantityLength uc6Cm =
                 new QuantityLength(2.54, LengthUnit.CENTIMETERS);
 
-        QuantityLength oneInch =
+        QuantityLength uc6OneInch =
                 new QuantityLength(1.0, LengthUnit.INCHES);
 
-        System.out.println("CM + Inches: " + cm.add(oneInch));
+        System.out.println("CM + Inches: "
+                + uc6Cm.add(uc6OneInch));
 
-
-        // UC6: Negative values
-        QuantityLength fiveFeet =
+        QuantityLength uc6FiveFeet =
                 new QuantityLength(5.0, LengthUnit.FEET);
 
-        QuantityLength negativeFeet =
+        QuantityLength uc6NegativeFeet =
                 new QuantityLength(-2.0, LengthUnit.FEET);
 
-        System.out.println("Negative addition: "
-                + fiveFeet.add(negativeFeet));
+        System.out.println("Negative Addition: "
+                + uc6FiveFeet.add(uc6NegativeFeet));
 
-
-        // UC6 examples
-
-        demonstrateAddition(
-                1.0, LengthUnit.FEET,
-                2.0, LengthUnit.FEET);
-
+        // Existing demonstration method
         demonstrateAddition(
                 1.0, LengthUnit.FEET,
                 12.0, LengthUnit.INCHES);
 
-        demonstrateAddition(
-                12.0, LengthUnit.INCHES,
-                1.0, LengthUnit.FEET);
 
-        demonstrateAddition(
-                1.0, LengthUnit.YARDS,
-                3.0, LengthUnit.FEET);
+        // ==========================================
+        // UC7: Addition with Target Unit
+        // ==========================================
 
-        demonstrateAddition(
-                2.54, LengthUnit.CENTIMETERS,
-                1.0, LengthUnit.INCHES);
-
-        demonstrateAddition(
-                5.0, LengthUnit.FEET,
-                -2.0, LengthUnit.FEET);
-
-
-        // UC7: Addition with explicit target unit
-
-        QuantityLength UC7feet =
-                new QuantityLength(1.0, LengthUnit.FEET);
-
-        QuantityLength UC7inches =
-                new QuantityLength(12.0, LengthUnit.INCHES);
-
-
-        // UC7: Addition with explicit target unit
+        System.out.println("\n===== UC7: TARGET UNIT ADDITION =====");
 
         QuantityLength uc7Feet =
                 new QuantityLength(1.0, LengthUnit.FEET);
@@ -371,108 +370,178 @@ public class QuantityMeasurementApp {
         QuantityLength uc7Inches =
                 new QuantityLength(12.0, LengthUnit.INCHES);
 
-        // Result in feet
         System.out.println("Target FEET: "
-                + uc7Feet.add(uc7Inches, LengthUnit.FEET));
+                + uc7Feet.add(
+                uc7Inches, LengthUnit.FEET));
 
-        // Result in inches
         System.out.println("Target INCHES: "
-                + uc7Feet.add(uc7Inches, LengthUnit.INCHES));
+                + uc7Feet.add(
+                uc7Inches, LengthUnit.INCHES));
 
-        // Result in yards
         System.out.println("Target YARDS: "
-                + uc7Feet.add(uc7Inches, LengthUnit.YARDS));
+                + uc7Feet.add(
+                uc7Inches, LengthUnit.YARDS));
 
-        // Result in centimeters
         System.out.println("Target CENTIMETERS: "
-                + uc7Feet.add(uc7Inches, LengthUnit.CENTIMETERS));
+                + uc7Feet.add(
+                uc7Inches, LengthUnit.CENTIMETERS));
 
-        // Using the static addition method
-        System.out.println("Static addition: "
+        System.out.println("Static Addition: "
                 + QuantityLength.add(
                 uc7Feet,
                 uc7Inches,
                 LengthUnit.YARDS));
 
 
-        // UC8: Standalone enum conversions
+        // ==========================================
+        // UC8: Standalone LengthUnit Enum
+        // ==========================================
 
-        System.out.println("12 inches to feet: "
-                + LengthUnit.INCHES.convertToBaseUnit(12.0));
+        System.out.println("\n===== UC8: ENUM CONVERSION =====");
 
-        System.out.println("1 yard to feet: "
-                + LengthUnit.YARDS.convertToBaseUnit(1.0));
+        System.out.println("12 Inches to Feet: "
+                + LengthUnit.INCHES
+                .convertToBaseUnit(12.0));
 
-        System.out.println("2 feet to inches: "
-                + LengthUnit.INCHES.convertFromBaseUnit(2.0));
+        System.out.println("1 Yard to Feet: "
+                + LengthUnit.YARDS
+                .convertToBaseUnit(1.0));
 
-        System.out.println("1 foot to cm: "
-                + LengthUnit.CENTIMETERS.convertFromBaseUnit(1.0));
+        System.out.println("2 Feet to Inches: "
+                + LengthUnit.INCHES
+                .convertFromBaseUnit(2.0));
 
-        // Existing QuantityLength APIs still work
+        System.out.println("1 Foot to Centimeters: "
+                + LengthUnit.CENTIMETERS
+                .convertFromBaseUnit(1.0));
+
         QuantityLength uc8Feet =
                 new QuantityLength(1.0, LengthUnit.FEET);
 
         QuantityLength uc8Inches =
                 new QuantityLength(12.0, LengthUnit.INCHES);
 
-        System.out.println("Equality: "
+        System.out.println("Equality after refactoring: "
                 + uc8Feet.equals(uc8Inches));
 
-        System.out.println("Conversion: "
+        System.out.println("Conversion after refactoring: "
                 + uc8Feet.convertTo(LengthUnit.INCHES));
 
-        System.out.println("Addition: "
-                + uc8Feet.add(uc8Inches, LengthUnit.FEET));
+        System.out.println("Addition after refactoring: "
+                + uc8Feet.add(
+                uc8Inches, LengthUnit.FEET));
 
 
+        // ==========================================
+        // UC9: Weight Measurement
+        // ==========================================
 
-        // UC10: Generic Quantity demonstration
+        System.out.println("\n===== UC9: WEIGHT MEASUREMENT =====");
 
-                Quantity<LengthUnit> uc10Feet =
-                        new Quantity<>(1.0, LengthUnit.FEET);
+        QuantityWeight uc9Kg =
+                new QuantityWeight(
+                        1.0, WeightUnit.KILOGRAM);
 
-                Quantity<LengthUnit> uc10Inches =
-                        new Quantity<>(12.0, LengthUnit.INCHES);
+        QuantityWeight uc9Grams =
+                new QuantityWeight(
+                        1000.0, WeightUnit.GRAM);
 
-        // Length equality
-                demonstrateEquality(uc10Feet, uc10Inches);
+        QuantityWeight uc9Pounds =
+                new QuantityWeight(
+                        2.20462, WeightUnit.POUND);
 
-        // Length conversion
-                demonstrateConversion(uc10Feet, LengthUnit.INCHES);
+        // Equality
+        System.out.println("KG vs Grams: "
+                + uc9Kg.equals(uc9Grams));
 
-        // Length addition
-                demonstrateAddition(
-                        uc10Feet,
-                        uc10Inches,
-                        LengthUnit.FEET
-                );
+        System.out.println("KG vs Pounds: "
+                + uc9Kg.equals(uc9Pounds));
 
-        // Weight objects
-                Quantity<WeightUnit> uc10Kg =
-                        new Quantity<>(1.0, WeightUnit.KILOGRAM);
+        // Conversion
+        System.out.println("KG to Grams: "
+                + uc9Kg.convertTo(WeightUnit.GRAM));
 
-                Quantity<WeightUnit> uc10Grams =
-                        new Quantity<>(1000.0, WeightUnit.GRAM);
+        System.out.println("2 Pounds to KG: "
+                + new QuantityWeight(
+                2.0, WeightUnit.POUND)
+                .convertTo(WeightUnit.KILOGRAM));
 
-        // Weight equality
-                demonstrateEquality(uc10Kg, uc10Grams);
+        // Addition
+        System.out.println("KG + Grams: "
+                + uc9Kg.add(uc9Grams));
 
-        // Weight conversion
-                demonstrateConversion(uc10Kg, WeightUnit.GRAM);
+        System.out.println("KG + Grams in GRAM: "
+                + uc9Kg.add(
+                uc9Grams, WeightUnit.GRAM));
 
-        // Weight addition
-                demonstrateAddition(
-                        uc10Kg,
-                        uc10Grams,
-                        WeightUnit.KILOGRAM
-                );
+        // Cross-category comparison
+        QuantityLength uc9Length =
+                new QuantityLength(
+                        1.0, LengthUnit.FEET);
 
-        // Runtime category check
-                System.out.println(
-                        "Length vs Weight: " + uc10Feet.equals(uc10Kg)
-                );
+        System.out.println("Weight vs Length: "
+                + uc9Kg.equals(uc9Length));
 
 
+        // ==========================================
+        // UC10: Generic Quantity with Interface
+        // ==========================================
+
+        System.out.println("\n===== UC10: GENERIC QUANTITY =====");
+
+        // Generic Length objects
+        Quantity<LengthUnit> uc10Feet =
+                new Quantity<>(
+                        1.0, LengthUnit.FEET);
+
+        Quantity<LengthUnit> uc10Inches =
+                new Quantity<>(
+                        12.0, LengthUnit.INCHES);
+
+        // Generic Weight objects
+        Quantity<WeightUnit> uc10Kg =
+                new Quantity<>(
+                        1.0, WeightUnit.KILOGRAM);
+
+        Quantity<WeightUnit> uc10Grams =
+                new Quantity<>(
+                        1000.0, WeightUnit.GRAM);
+
+        // Generic length operations
+        demonstrateEquality(
+                uc10Feet, uc10Inches);
+
+        demonstrateConversion(
+                uc10Feet, LengthUnit.INCHES);
+
+        demonstrateAddition(
+                uc10Feet,
+                uc10Inches,
+                LengthUnit.FEET);
+
+        // Generic weight operations
+        demonstrateEquality(
+                uc10Kg, uc10Grams);
+
+        demonstrateConversion(
+                uc10Kg, WeightUnit.GRAM);
+
+        demonstrateAddition(
+                uc10Kg,
+                uc10Grams,
+                WeightUnit.KILOGRAM);
+
+        // Category incompatibility
+        System.out.println("Length vs Weight: "
+                + uc10Feet.equals(uc10Kg));
+
+
+        // ==========================================
+        // END
+        // ==========================================
+
+        System.out.println(
+                "\n===== ALL USE CASES COMPLETED =====");
     }
+
 }
