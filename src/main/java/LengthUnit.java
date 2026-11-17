@@ -1,16 +1,20 @@
 
+import java.math.BigDecimal;
+
 public enum LengthUnit {
 
-    FEET(1.0),
-    INCHES(1.0 / 12.0);
+    FEET("12"),
+    INCHES("1"),
+    YARDS("36"),
+    CENTIMETERS("0.39370078740157480315");
 
-    private final double conversionFactor;
+    private final BigDecimal conversionFactor;
 
-    LengthUnit(double conversionFactor) {
-        this.conversionFactor = conversionFactor;
+    LengthUnit(String factor) {
+        this.conversionFactor = new BigDecimal(factor);
     }
 
-    public double getConversionFactor() {
+    public BigDecimal getConversionFactor() {
         return conversionFactor;
     }
 }
