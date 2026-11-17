@@ -128,6 +128,23 @@ public class QuantityMeasurementApp {
     }
 
 
+    //Demonstrate Addition
+    public static void demonstrateAddition(
+            double value1, LengthUnit unit1,
+            double value2, LengthUnit unit2) {
+
+        QuantityLength q1 = new QuantityLength(value1, unit1);
+        QuantityLength q2 = new QuantityLength(value2, unit2);
+
+        QuantityLength result = q1.add(q2);
+
+        System.out.println(
+                q1 + " + " + q2 + " = " + result
+        );
+    }
+
+
+
 
 
     public static void main(String[] args) {
@@ -277,6 +294,33 @@ public class QuantityMeasurementApp {
                         + fiveFeet.add(negativeFeet));
 
 
-            }
+        // UC6 examples
+
+                demonstrateAddition(
+                        1.0, LengthUnit.FEET,
+                        2.0, LengthUnit.FEET);
+
+                demonstrateAddition(
+                        1.0, LengthUnit.FEET,
+                        12.0, LengthUnit.INCHES);
+
+                demonstrateAddition(
+                        12.0, LengthUnit.INCHES,
+                        1.0, LengthUnit.FEET);
+
+                demonstrateAddition(
+                        1.0, LengthUnit.YARDS,
+                        3.0, LengthUnit.FEET);
+
+                demonstrateAddition(
+                        2.54, LengthUnit.CENTIMETERS,
+                        1.0, LengthUnit.INCHES);
+
+                demonstrateAddition(
+                        5.0, LengthUnit.FEET,
+                        -2.0, LengthUnit.FEET);
+
+
+    }
 
 }
