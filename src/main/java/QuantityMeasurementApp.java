@@ -221,6 +221,62 @@ public class QuantityMeasurementApp {
                         LengthUnit.FEET
                 );
 
-    }
+
+        // UC6: Same-unit addition
+                QuantityLength feet1 =
+                        new QuantityLength(1.0, LengthUnit.FEET);
+
+                QuantityLength feet2 =
+                        new QuantityLength(2.0, LengthUnit.FEET);
+
+                System.out.println("Feet + Feet: " + feet1.add(feet2));
+
+
+        // UC6: Feet + Inches
+                QuantityLength feet =
+                        new QuantityLength(1.0, LengthUnit.FEET);
+
+                QuantityLength inches =
+                        new QuantityLength(12.0, LengthUnit.INCHES);
+
+                System.out.println("Feet + Inches: " + feet.add(inches));
+
+
+        // UC6: Inches + Feet
+                System.out.println("Inches + Feet: " + inches.add(feet));
+
+
+        // UC6: Yards + Feet
+                QuantityLength yards =
+                        new QuantityLength(1.0, LengthUnit.YARDS);
+
+                QuantityLength threeFeet =
+                        new QuantityLength(3.0, LengthUnit.FEET);
+
+                System.out.println("Yards + Feet: " + yards.add(threeFeet));
+
+
+        // UC6: Centimeters + Inches
+                QuantityLength cm =
+                        new QuantityLength(2.54, LengthUnit.CENTIMETERS);
+
+                QuantityLength oneInch =
+                        new QuantityLength(1.0, LengthUnit.INCHES);
+
+                System.out.println("CM + Inches: " + cm.add(oneInch));
+
+
+        // UC6: Negative values
+                QuantityLength fiveFeet =
+                        new QuantityLength(5.0, LengthUnit.FEET);
+
+                QuantityLength negativeFeet =
+                        new QuantityLength(-2.0, LengthUnit.FEET);
+
+                System.out.println("Negative addition: "
+                        + fiveFeet.add(negativeFeet));
+
+
+            }
 
 }

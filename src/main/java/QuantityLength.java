@@ -108,4 +108,69 @@ public final class QuantityLength {
     }
 
 
+    /**
+     * Adds another length to the current length.
+     * Returns the result in the unit of the first object.
+     */
+    public QuantityLength add(QuantityLength other) {
+
+        // Step 1: Check whether the second object is null
+        if (other == null) {
+            throw new IllegalArgumentException(
+                    "Second quantity cannot be null");
+        }
+
+        // Step 2: Convert the other value to this object's unit
+        double convertedValue = convert(
+                other.value,
+                other.unit,
+                this.unit
+        );
+
+        // Step 3: Add both measurements
+        double sum = this.value + convertedValue;
+
+        // Step 4: Validate the result
+        if (!Double.isFinite(sum)) {
+            throw new ArithmeticException(
+                    "Addition result is outside the double range");
+        }
+
+        // Step 5: Return a new object
+        return new QuantityLength(sum, this.unit);
+    }
+
+
+    // Addition of two QuantityLength objects
+// Returns the result in the explicitly requested target unit
+    public static QuantityLength add(
+            QuantityLength first,
+            QuantityLength second,
+            LengthUnit targetUnit) {
+
+        if (first == null || second == null || targetUnit == null) {
+            throw new IllegalArgumentException(
+                    "Quantities and target unit cannot be null");
+        }
+
+        QuantityLength sum = first.add(second);
+
+        return sum.convertTo(targetUnit);
+    }
+
+    // Addition using raw values and units
+    public static QuantityLength add(
+            double value1, LengthUnit unit1,
+            double value2, LengthUnit unit2,
+            LengthUnit targetUnit) {
+
+        QuantityLength first = new QuantityLength(value1, unit1);
+        QuantityLength second = new QuantityLength(value2, unit2);
+
+        return add(first, second, targetUnit);
+    }
+
+
+
+
 }
