@@ -841,6 +841,65 @@ public class QuantityMeasurementApp {
                         uc12Grams
                 );
 
+        // ==========================================
+        // UC13: Centralized Arithmetic Logic
+        // ==========================================
+
+        System.out.println(
+                "\n===== UC13: CENTRALIZED ARITHMETIC =====");
+
+        // Create two length quantities.
+        Quantity<LengthUnit> uc13Feet =
+                new Quantity<>(10.0, LengthUnit.FEET);
+
+        Quantity<LengthUnit> uc13Inches =
+                new Quantity<>(6.0, LengthUnit.INCHES);
+
+
+        // ADD: Uses the centralized arithmetic helper.
+        System.out.println("Addition: "
+                + uc13Feet.add(uc13Inches));
+
+
+        // SUBTRACT: Uses the same helper with SUBTRACT.
+        System.out.println("Subtraction: "
+                + uc13Feet.subtract(uc13Inches));
+
+
+        // DIVIDE: Uses the same helper with DIVIDE.
+        System.out.println("Division: "
+                + uc13Feet.divide(uc13Inches));
+
+
+        // Subtraction with explicit target unit.
+        System.out.println("Subtraction in INCHES: "
+                + uc13Feet.subtract(
+                uc13Inches,
+                LengthUnit.INCHES
+        ));
+
+
+        // Weight demonstration.
+        Quantity<WeightUnit> uc13Kg =
+                new Quantity<>(10.0, WeightUnit.KILOGRAM);
+
+        Quantity<WeightUnit> uc13Grams =
+                new Quantity<>(5000.0, WeightUnit.GRAM);
+
+        System.out.println("Weight subtraction: "
+                + uc13Kg.subtract(uc13Grams));
+
+
+        // Volume demonstration.
+        Quantity<VolumeUnit> uc13Litres =
+                new Quantity<>(5.0, VolumeUnit.LITRE);
+
+        Quantity<VolumeUnit> uc13Ml =
+                new Quantity<>(500.0, VolumeUnit.MILLILITRE);
+
+        System.out.println("Volume subtraction: "
+                + uc13Litres.subtract(uc13Ml));
+
     }
 
 }
