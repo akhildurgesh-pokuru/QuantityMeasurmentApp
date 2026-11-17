@@ -179,6 +179,42 @@ public class QuantityMeasurementApp {
     }
 
 
+    // UC12: Generic subtraction demonstration.
+    //
+    // Works with LengthUnit, WeightUnit and VolumeUnit
+    // because all implement IMeasurable.
+    public static <U extends IMeasurable> void demonstrateSubtraction(
+            Quantity<U> first,
+            Quantity<U> second,
+            U targetUnit) {
+
+        // Perform subtraction in the requested unit.
+        Quantity<U> result =
+                first.subtract(second, targetUnit);
+
+        // Display the operation and result.
+        System.out.println(
+                first + " - " + second + " = " + result
+        );
+    }
+
+
+    // UC12: Generic division demonstration.
+    public static <U extends IMeasurable> void demonstrateDivision(
+            Quantity<U> first,
+            Quantity<U> second) {
+
+        // Divide the measurements.
+        double result = first.divide(second);
+
+        // Display the dimensionless ratio.
+        System.out.println(
+                first + " / " + second + " = " + result
+        );
+    }
+
+
+
 
 
     public static void main(String[] args) {
@@ -706,6 +742,104 @@ public class QuantityMeasurementApp {
                         + uc11Litre.equals(uc11Weight));
 
 
+
+        // ==========================================
+        // UC12: Subtraction and Division
+        // ==========================================
+
+                System.out.println("\n===== UC12: SUBTRACTION =====");
+
+        // Create length quantities.
+                Quantity<LengthUnit> uc12Feet =
+                        new Quantity<>(10.0, LengthUnit.FEET);
+
+                Quantity<LengthUnit> uc12Inches =
+                        new Quantity<>(6.0, LengthUnit.INCHES);
+
+        // Subtraction using first object's unit.
+        // 10 feet - 6 inches = 9.5 feet.
+                System.out.println("Length subtraction: "
+                        + uc12Feet.subtract(uc12Inches));
+
+        // Subtraction with explicitly requested unit.
+        // 9.5 feet = 114 inches.
+                System.out.println("Subtraction in inches: "
+                        + uc12Feet.subtract(
+                        uc12Inches,
+                        LengthUnit.INCHES
+                ));
+
+
+        // Create weight quantities.
+                Quantity<WeightUnit> uc12Kg =
+                        new Quantity<>(10.0, WeightUnit.KILOGRAM);
+
+                Quantity<WeightUnit> uc12Grams =
+                        new Quantity<>(5000.0, WeightUnit.GRAM);
+
+        // 10 kg - 5000 g = 5 kg.
+                System.out.println("Weight subtraction: "
+                        + uc12Kg.subtract(uc12Grams));
+
+
+        // Create volume quantities.
+                Quantity<VolumeUnit> uc12Litres =
+                        new Quantity<>(5.0, VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> uc12Ml =
+                        new Quantity<>(500.0, VolumeUnit.MILLILITRE);
+
+        // 5 litres - 500 millilitres = 4.5 litres.
+                System.out.println("Volume subtraction: "
+                        + uc12Litres.subtract(uc12Ml));
+
+
+        // Reuse the generic demonstration method.
+                demonstrateSubtraction(
+                        uc12Feet,
+                        uc12Inches,
+                        LengthUnit.FEET
+                );
+
+
+        // ==========================================
+        // UC12: Division
+        // ==========================================
+
+                System.out.println("\n===== UC12: DIVISION =====");
+
+        // 10 feet / 6 inches = 20.
+        // Because 6 inches = 0.5 feet.
+                System.out.println("Length division: "
+                        + uc12Feet.divide(uc12Inches));
+
+        // 10 kg / 5000 g = 2.
+                System.out.println("Weight division: "
+                        + uc12Kg.divide(uc12Grams));
+
+        // 5 litres / 500 millilitres = 10.
+                System.out.println("Volume division: "
+                        + uc12Litres.divide(uc12Ml));
+
+
+        // Division with equivalent lengths.
+                Quantity<LengthUnit> uc12TwoFeet =
+                        new Quantity<>(2.0, LengthUnit.FEET);
+
+                Quantity<LengthUnit> uc12TwentyFourInches =
+                        new Quantity<>(24.0, LengthUnit.INCHES);
+
+        // Both represent the same length,
+        // so the ratio is 1.0.
+                System.out.println("Equivalent length ratio: "
+                        + uc12TwentyFourInches.divide(uc12TwoFeet));
+
+
+        // Reuse the generic division demonstration.
+                demonstrateDivision(
+                        uc12Kg,
+                        uc12Grams
+                );
 
     }
 

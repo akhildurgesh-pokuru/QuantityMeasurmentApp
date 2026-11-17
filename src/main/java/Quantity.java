@@ -191,4 +191,169 @@ public final class Quantity<U extends IMeasurable> {
     public String toString() {
         return value + " " + unit.getUnitName();
     }
+
+
+    // ==============================================
+    // UC12: Subtraction with implicit target unit
+    // ==============================================
+
+    /**
+     * Subtract another quantity from this quantity.
+     *
+     * The result uses the first object's unit.
+     *
+     * Example:
+     * 10 FEET - 6 INCHES = 9.5 FEET
+     */
+    public Quantity<U> subtract(Quantity<U> other) {
+
+        // Check whether the second quantity is null.
+        if (other == null) {
+            throw new IllegalArgumentException(
+                    "Second quantity cannot be null");
+        }
+
+        // Reuse the overloaded subtraction method.
+        // this.unit means the first object's unit.
+        return subtract(other, this.unit);
+    }
+
+
+    // ==============================================
+    // UC12: Subtraction with explicit target unit
+    // ==============================================
+
+    /**
+     * Subtract another quantity and return the result
+     * in the specified target unit.
+     *
+     * Example:
+     * 10 FEET - 6 INCHES = 114 INCHES
+     */
+    public Quantity<U> subtract(
+            Quantity<U> other,
+            U targetUnit) {
+
+        // Step 1: Validate the second object.
+        if (other == null) {
+            throw new IllegalArgumentException(
+                    "Second quantity cannot be null");
+        }
+
+        // Step 2: Validate the target unit.
+        if (targetUnit == null) {
+            throw new IllegalArgumentException(
+                    "Target unit cannot be null");
+        }
+
+        // Step 3: Make sure both quantities and
+        // the target unit belong to the same category.
+        //
+        // For example, FEET and INCHES are compatible.
+        // FEET and KILOGRAM are not compatible.
+        if (this.unit.getClass() != other.unit.getClass()
+                || this.unit.getClass() != targetUnit.getClass()) {
+
+            throw new IllegalArgumentException(
+                    "Cannot subtract different measurement categories");
+        }
+
+        // Step 4: Convert the first measurement
+        // into its category's common base unit.
+        //
+        // For length, this is FEET.
+        // For weight, this is KILOGRAM.
+        // For volume, this is LITRE.
+        double firstBase =
+                this.unit.convertToBaseUnit(this.value);
+
+        // Step 5: Convert the second measurement
+        // into the same common base unit.
+        double secondBase =
+                other.unit.convertToBaseUnit(other.value);
+
+        // Step 6: Subtract the converted values.
+        double difference = firstBase - secondBase;
+
+        // Step 7: Reject overflow or invalid results.
+        if (!Double.isFinite(difference)) {
+            throw new ArithmeticException(
+                    "Subtraction result is not finite");
+        }
+
+        // Step 8: Convert the difference
+        // into the requested target unit.
+        double convertedResult =
+                targetUnit.convertFromBaseUnit(difference);
+
+        // Step 9: Validate the final converted result.
+        if (!Double.isFinite(convertedResult)) {
+            throw new ArithmeticException(
+                    "Converted subtraction result is not finite");
+        }
+
+        // Step 10: Return a NEW Quantity object.
+        // Neither original object gets modified.
+        return new Quantity<>(convertedResult, targetUnit);
+    }
+
+
+    // ==============================================
+    // UC12: Division between two quantities
+    // ==============================================
+
+    /**
+     * Divide this quantity by another quantity
+     * of the same measurement category.
+     *
+     * Returns a dimensionless double ratio.
+     *
+     * Example:
+     * 24 INCHES / 2 FEET = 1.0
+     */
+    public double divide(Quantity<U> other) {
+
+        // Step 1: Reject a null divisor.
+        if (other == null) {
+            throw new IllegalArgumentException(
+                    "Divisor quantity cannot be null");
+        }
+
+        // Step 2: Ensure both quantities belong
+        // to the same measurement category.
+        if (this.unit.getClass() != other.unit.getClass()) {
+            throw new IllegalArgumentException(
+                    "Cannot divide different measurement categories");
+        }
+
+        // Step 3: Convert both quantities
+        // into the common base unit.
+        double firstBase =
+                this.unit.convertToBaseUnit(this.value);
+
+        double secondBase =
+                other.unit.convertToBaseUnit(other.value);
+
+        // Step 4: Division by zero is not allowed.
+        if (secondBase == 0.0) {
+            throw new ArithmeticException(
+                    "Cannot divide by zero quantity");
+        }
+
+        // Step 5: Divide the two measurements.
+        //
+        // Both have the same base unit,
+        // so the units cancel each other.
+        double ratio = firstBase / secondBase;
+
+        // Step 6: Validate the ratio.
+        if (!Double.isFinite(ratio)) {
+            throw new ArithmeticException(
+                    "Division result is not finite");
+        }
+
+        // Step 7: Return the numerical ratio.
+        return ratio;
+    }
+
 }
