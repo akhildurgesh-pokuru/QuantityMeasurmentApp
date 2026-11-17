@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-public enum LengthUnit {
+public enum LengthUnit implements IMeasurable{
 
     // Existing factors relative to inches
     FEET("12"),
@@ -77,5 +77,15 @@ public enum LengthUnit {
             throw new IllegalArgumentException(
                     "Measurement must be a finite number");
         }
+    }
+
+    @Override
+    public String getUnitName() {
+        return name();
+    }
+
+    @Override
+    public BigDecimal normalizedBaseValue(double value) {
+        return normalizedInches(value);
     }
 }
