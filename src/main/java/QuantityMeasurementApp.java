@@ -477,14 +477,14 @@ public class QuantityMeasurementApp {
         // UC9: Weight Measurement
 
         // Equality
-                QuantityWeight uc9Kg =
-                        new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        QuantityWeight uc9DemoKg =
+                new QuantityWeight(1.0, WeightUnit.KILOGRAM);
 
-                QuantityWeight uc9Grams =
-                        new QuantityWeight(1000.0, WeightUnit.GRAM);
+        QuantityWeight uc9DemoGrams =
+                new QuantityWeight(1000.0, WeightUnit.GRAM);
 
-                System.out.println("KG vs Grams: "
-                        + uc9Kg.equals(uc9Grams));
+        System.out.println("KG vs Grams: "
+                + uc9DemoKg.equals(uc9DemoGrams));
 
         // Pounds equality
                 QuantityWeight uc9Pounds =
