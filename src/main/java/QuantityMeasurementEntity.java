@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 // The class is immutable:
 // all fields are private and final.
 public final class QuantityMeasurementEntity
-        implements Serializable {
+        implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 
@@ -36,6 +37,9 @@ public final class QuantityMeasurementEntity
     private final String timestamp;
 
     // Private constructor used by factory methods.
+
+    // Existing constructor used by UC15 factory methods.
+// Preserves compatibility with existing code.
     private QuantityMeasurementEntity(
             String operation,
             QuantityDTO first,
@@ -45,6 +49,32 @@ public final class QuantityMeasurementEntity
             Double scalarResult,
             String errorMessage) {
 
+        // New records use the current timestamp.
+        this(
+                operation,
+                first,
+                second,
+                result,
+                comparisonResult,
+                scalarResult,
+                errorMessage,
+                java.time.LocalDateTime.now().toString()
+        );
+    }
+
+
+    // Additional constructor used when loading records
+// that already have timestamps in the database.
+    private QuantityMeasurementEntity(
+            String operation,
+            QuantityDTO first,
+            QuantityDTO second,
+            QuantityDTO result,
+            Boolean comparisonResult,
+            Double scalarResult,
+            String errorMessage,
+            String timestamp) {
+
         this.operation = operation;
         this.first = first;
         this.second = second;
@@ -52,9 +82,9 @@ public final class QuantityMeasurementEntity
         this.comparisonResult = comparisonResult;
         this.scalarResult = scalarResult;
         this.errorMessage = errorMessage;
-
-        this.timestamp = LocalDateTime.now().toString();
+        this.timestamp = timestamp;
     }
+
 
     // Successful operation returning a quantity.
     public static QuantityMeasurementEntity quantityResult(
@@ -101,6 +131,34 @@ public final class QuantityMeasurementEntity
                 operation, first, second,
                 null, null, null, message);
     }
+
+
+    // UC16: Reconstruct an entity retrieved from JDBC.
+//
+// Unlike the normal factory methods, this preserves
+// the timestamp that was originally stored.
+    public static QuantityMeasurementEntity fromDatabase(
+            String operation,
+            QuantityDTO first,
+            QuantityDTO second,
+            QuantityDTO result,
+            Boolean comparisonResult,
+            Double scalarResult,
+            String errorMessage,
+            String timestamp) {
+
+        return new QuantityMeasurementEntity(
+                operation,
+                first,
+                second,
+                result,
+                comparisonResult,
+                scalarResult,
+                errorMessage,
+                timestamp
+        );
+    }
+
 
     public String getOperation() {
         return operation;
